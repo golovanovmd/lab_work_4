@@ -1,0 +1,25 @@
+name: lab04
+run-name: Make everything
+on: [push]
+jobs:
+  compile_on_ubuntu:
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
+
+      - name: Compile on linux
+        run: |
+          cmake -H. -B_build
+          cmake --build _build
+
+  compile_on_windows:
+    runs-on: windows-latest
+    steps:
+      - name: checkout
+        uses: actions/checkout@v4
+
+      - name: Compile on Windows
+        uses: threeal/cmake-action@v1.3.0
